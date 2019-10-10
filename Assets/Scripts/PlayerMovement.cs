@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "Crystal")
         {
             _playerFindedCrystal.Invoke();
-            Destroy(other.gameObject);
+            other.GetComponent<CrystalDestroy>().OnDestroyCrystal();
         }
     }
 }

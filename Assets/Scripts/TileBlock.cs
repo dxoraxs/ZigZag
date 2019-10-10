@@ -4,7 +4,6 @@ public class TileBlock : MonoBehaviour
 {
     [SerializeField] private GameObject _crystalPrefab;
     [SerializeField] private int _percentSpawnCrystal;
-    [SerializeField] private Vector3 _rotationSpeed;
     private Rigidbody _rigidbody;
     private Transform _crystalTransform;
 
@@ -34,13 +33,5 @@ public class TileBlock : MonoBehaviour
     private void Awake()
     {        
         if (_rigidbody==null) _rigidbody = GetComponent<Rigidbody>();
-    }
-    
-    private void FixedUpdate()
-    {
-        if (_crystalTransform != null)
-        {
-            _crystalTransform.Rotate(_rotationSpeed * Time.deltaTime);
-        }
-    }
+    }    
 }
