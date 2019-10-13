@@ -2,10 +2,7 @@
 
 public class TileBlock : MonoBehaviour
 {
-    [SerializeField] private GameObject _crystalPrefab;
-    [SerializeField] private int _percentSpawnCrystal;
     private Rigidbody _rigidbody;
-    private Transform _crystalTransform;
 
     public float GetLocalPosition => transform.localPosition.z;
 
@@ -17,18 +14,10 @@ public class TileBlock : MonoBehaviour
     public void ResetBLock()
     {
         _rigidbody.isKinematic = true;
-        if (_crystalTransform != null)
-            Destroy(_crystalTransform.gameObject);
+        OnBlockReset();
     }
 
-    public void RandomSpawnCrystal()
-    {
-        if (Random.Range(0, 100) <= _percentSpawnCrystal)
-        {
-            _crystalTransform = Instantiate(_crystalPrefab, transform).transform;
-            _crystalTransform.position = transform.position + new Vector3(0, 1);
-        }
-    }
+    protected virtual void OnBlockReset() {}
 
     private void Awake()
     {        

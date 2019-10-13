@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         return transform.position.z;
     }
-    
+
     private void Update()
     {
         if (!_gameController.IsGame) return;

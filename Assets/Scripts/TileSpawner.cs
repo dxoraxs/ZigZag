@@ -1,24 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
-public class TileSpawner : MonoBehaviour
+public class TileSpawner : ObjectSpawner
 {
-    [Inject] private PlayerMovement _playerScript;
-    [Inject] private GameController _gameController;
-    [SerializeField] private Vector3 _startSpawnPoint;
-    [SerializeField] private Vector3 _offsetNextPosition;
     [SerializeField] private GameObject _titlePrefab;
-    [SerializeField] private int _numberOfObjects;
+    [SerializeField] private GameObject _titlePrefabWithPortal;
     [SerializeField] private float _startAnimationOffset;
-    [SerializeField] private float _borderSpawn;
-    private Vector3 _nextSpawnPosition;
-    private Queue<GameObject> _objectQueue;
 
-    private void Start()
+    private int _blockToNextEvent;
+
+    protected new void Start()
     {
-        _objectQueue = new Queue<GameObject>(_numberOfObjects);
+        base.Start();
+        _blockToNextEvent = Random.Range(10, 20);
         for (int i=0; i<3; i++)
         {
             _nextSpawnPosition = _startSpawnPoint;
@@ -41,45 +36,61 @@ public class TileSpawner : MonoBehaviour
     private void FixedUpdate()
     {
         if (!_gameController.IsGame) return;
-        else if (_objectQueue.Peek().transform.GetComponent<TileBlock>().GetLocalPosition + _startAnimationOffset < _playerScript.GetZPositinion())
+        
+        if (_objectQueue.Peek().transform.GetComponent<TileBlock>().GetLocalPosition + _startAnimationOffset < _playerScript.GetZPositinion())
         {
             _objectQueue.Peek().transform.GetComponent<TileBlock>().FallTileBlock();
             StartCoroutine("Fade", _objectQueue.Dequeue());
         }
     }
 
-    IEnumerator Fade(GameObject recycleObject)
+    private IEnumerator Fade(GameObject recycleObject)
     {
         yield return new WaitForSeconds(1);
         Recycle(recycleObject);
     }
 
-    private void Recycle(GameObject recycleObject = null)
+    protected override void OnRecycleObject(GameObject recycleObject)
     {
-        if (recycleObject == null)
-        {
-            recycleObject = _objectQueue.Dequeue();
-        }
-        recycleObject.transform.localPosition = _nextSpawnPosition;
         recycleObject.GetComponent<TileBlock>().ResetBLock();
-        recycleObject.GetComponent<TileBlock>().RandomSpawnCrystal();
-        ComputeNextPosition(_offsetNextPosition.z, CorrectionXPosition());
-        _objectQueue.Enqueue(recycleObject);
+        recycleObject.GetComponent<DefaultTile>().RandomSpawnCrystal();
+
+        _blockToNextEvent--;
+        if (_blockToNextEvent==0)
+        {
+            SpawPortal(recycleObject.transform.position.x);
+        }
+        recycleObject.transform.rotation = Quaternion.Euler(new Vector3(0, Random.Range(0, 100) < 50 ? 45 : -45, 0));
     }
 
-    private void ComputeNextPosition(float z, float x)
+    protected override bool IsContinue(GameObject recycleObject)
     {
-        _nextSpawnPosition.z += z;
-        _nextSpawnPosition.x += x;
+        if (!recycleObject.GetComponent<DefaultTile>())
+        {
+            Destroy(recycleObject);
+            return false;
+        }
+        return true;
     }
 
-    private float CorrectionXPosition()
+    private void SpawPortal(float lastPosition)
     {
-        if (_nextSpawnPosition.x <= -_borderSpawn) 
-            return _offsetNextPosition.x;
-        else if (_nextSpawnPosition.x >= _borderSpawn)
-            return -_offsetNextPosition.x;
-        else
-            return Random.Range(0, 100) > 50 ? _offsetNextPosition.x : -_offsetNextPosition.x;
+        GameObject portaEntryl = Instantiate(_titlePrefabWithPortal, transform);
+        _objectQueue.Enqueue(portaEntryl);
+        portaEntryl.GetComponent<PortalTile>().SetPortalTypeEntry();
+        portaEntryl.transform.position = _nextSpawnPosition;
+        ComputeNextPosition(0.7f, 0.7f * (int)Random.Range(4, 6) * (Random.Range(0, 10) < 5 ? -1 : 1));
+        _blockToNextEvent = Random.Range(10, 20);
+        if (portaEntryl.transform.position.x > lastPosition)
+        {
+            portaEntryl.transform.rotation = Quaternion.Euler(new Vector3(0, -45, 0));
+        }
+
+        GameObject portaExit = Instantiate(_titlePrefabWithPortal, transform);
+        _objectQueue.Enqueue(portaExit);
+        portaExit.transform.position = _nextSpawnPosition;
+
+        portaEntryl.GetComponent<PortalTile>().SetExitPortal(portaExit.transform);
+        ComputeNextPosition(0.7f, -0.7f);
     }
 }
