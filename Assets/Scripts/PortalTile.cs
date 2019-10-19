@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PortalTile : TileBlock
 {
+    [SerializeField]private Transform _portalTransform;
+    private Material[] m_Material;
     private PortalType _portalType = PortalType.Exit;
     private Transform ExitPortal;
+    private Renderer _renderer;
 
     public void SetPortalTypeEntry()
     {
@@ -15,13 +18,28 @@ public class PortalTile : TileBlock
     public void SetExitPortal(Transform portal)
     {
         ExitPortal = portal;
+        Color setDuetPortal = GetRandomColor();
+        ExitPortal.GetComponent<PortalTile>().SetColorPortal(setDuetPortal);
+        SetColorPortal(setDuetPortal);
     }
     
-    //protected override void OnBlockReset()
-    //{
-    //    if (_crystalTransform != null)
-    //        Destroy(_crystalTransform.gameObject);
-    //}
+    public void SetColorPortal(Color setMaterial)
+    {
+        if (_renderer == null) Start();
+        m_Material[1].color = setMaterial;
+        _renderer.materials= m_Material;
+    }
+
+    private Color GetRandomColor()
+    {
+        return new Color(Random.value, Random.value, Random.value, 1);
+    }
+
+    private void Start()
+    {
+        _renderer = _portalTransform.GetComponent<Renderer>();
+        m_Material = _renderer.materials;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

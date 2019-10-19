@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -28,12 +27,11 @@ public class ObjectSpawner : MonoBehaviour
         }
 
         if (!IsContinue(recycleObject)) return;
-
-        recycleObject.transform.localPosition = _nextSpawnPosition;
-        ComputeNextPosition(_offsetNextPosition.z, CorrectionXPosition());
-        OnRecycleObject(recycleObject);
-        _objectQueue.Enqueue(recycleObject);
+        _objectQueue.Enqueue(OnRecycleObject(recycleObject));
+        AfterAddingInQueue(recycleObject.transform.position.x);
     }
+
+    protected virtual void AfterAddingInQueue(float lastXPosition) { }
 
     protected float CorrectionXPosition()
     {
@@ -50,15 +48,21 @@ public class ObjectSpawner : MonoBehaviour
         return true;
     }
 
-    protected virtual void OnRecycleObject(GameObject recycleObject)
+    protected virtual GameObject OnRecycleObject(GameObject recycleObject)
     {
-
+        return recycleObject;
     }
-
-    protected virtual int GetLenghtQueue => _numberOfObjects;
 
     protected void Start()
     {
-        _objectQueue = new Queue<GameObject>(GetLenghtQueue);
+        _objectQueue = new Queue<GameObject>();
+    }
+
+    protected GameObject SpawnObjectWithParent(GameObject prefab, Transform transformParent, Vector3 position, Vector3 angle = new Vector3())
+    {
+        GameObject spawnObject = Instantiate(prefab, transformParent);
+        spawnObject.transform.localPosition = /*transformParent.localPosition +*/ position;
+        if (angle != new Vector3()) spawnObject.transform.localRotation = Quaternion.Euler(angle);
+        return spawnObject;
     }
 }

@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b955aa052cd33ba4fbf2d7f1e57d5c9a, type: 3}
+  m_Name: Branching_3
+  m_EditorClassIdentifier: 
+  position:
+  - TileSpawnPosition: {x: 0, y: 0, z: 0}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -0.7, y: 0, z: 0.7}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 0.7, y: 0, z: 0.7}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -1.4, y: 0, z: 1.4}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 1.4, y: 0, z: 1.4}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -2.1, y: 0, z: 2.1}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 2.1, y: 0, z: 2.1}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -2.8, y: 0, z: 2.8}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 2.8, y: 0, z: 2.8}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -2.1, y: 0, z: 3.5}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 2.1, y: 0, z: 3.5}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -2.8, y: 0, z: 4.2}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 2.8, y: 0, z: 4.2}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -2.1, y: 0, z: 4.9}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 2.1, y: 0, z: 4.9}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -2.8, y: 0, z: 5.6}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 2.8, y: 0, z: 5.6}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -2.1, y: 0, z: 6.3}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 2.1, y: 0, z: 6.3}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -1.4, y: 0, z: 7}
+    TypeTile: 2
+  - TileSpawnPosition: {x: 1.4, y: 0, z: 7}
+    TypeTile: 2
+  - TileSpawnPosition: {x: 2.8, y: -1, z: 8.4}
+    TypeTile: 2
+  - TileSpawnPosition: {x: -2.8, y: 1, z: 8.4}
+    TypeTile: 2
+  - TileSpawnPosition: {x: 2.1, y: -1, z: 9.1}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -2.1, y: 1, z: 9.1}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -1.4, y: 1, z: 9.8}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 1.4, y: -1, z: 9.8}
+    TypeTile: 0
+  - TileSpawnPosition: {x: -0.7, y: 0, z: 10.5}
+    TypeTile: 0
+  - TileSpawnPosition: {x: 0.7, y: -1, z: 10.5}
+    TypeTile: 1
+  - TileSpawnPosition: {x: 0, y: 0, z: 11.2}
+    TypeTile: 0

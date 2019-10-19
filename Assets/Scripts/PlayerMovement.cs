@@ -21,15 +21,21 @@ public class PlayerMovement : MonoBehaviour
         return transform.position.z;
     }
 
+    public float GetXPositinion()
+    {
+        return transform.position.x - _playerMovement.x;
+    }
+
     private void Update()
     {
         if (!_gameController.IsGame) return;
-
-        transform.Translate(_speed * _playerMovement * Time.deltaTime);
         if (Input.GetMouseButtonDown(0))
         {
             _playerMovement.x = _playerMovement.x < 0 ? 1f : -1f;
         }
+
+        //transform.position = Vector3.MoveTowards(transform.position, transform.position + _playerMovement, _speed * Time.deltaTime);
+        transform.Translate(_speed * _playerMovement * Time.deltaTime);
 
         if (transform.position.y < -4)
         {

@@ -20,7 +20,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1830327331523172653
 Transform:
@@ -95,8 +95,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.47, z: 1}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!54 &2586002727757149015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16b21aa4113e0947a352ba64c899124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _portalTransform: {fileID: 5447286171510610023}
 --- !u!65 &1958844857412446126
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,7 +155,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &221222766056184344
 Transform:
@@ -4902,6 +4903,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 8edf0a12db0794441a6018544b30dd44,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8edf0a12db0794441a6018544b30dd44,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4991,6 +4997,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cloud Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2502203975881118265, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -5541418325828146259, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5553897446301768786, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480803622386900505, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1984854832548365831, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879622775006723441, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969796551497462424, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -2550597949432035023, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 482098221214265244, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -7231659943852884358, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132922889761581976, guid: 12e759453cc25e846b86fd2f57f0785e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 12e759453cc25e846b86fd2f57f0785e,
         type: 3}
