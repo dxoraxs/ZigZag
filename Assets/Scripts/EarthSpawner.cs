@@ -41,9 +41,9 @@ public class EarthSpawner : ObjectSpawner
     {
         switch (Random.Range(0, 5))
         {
-            case 3:
+            case 0:
                 return VilageSpawn();
-            case 4:
+            case 1:
                 return RockSpawn();
             default:
                 return TreesSpawn();
@@ -64,13 +64,13 @@ public class EarthSpawner : ObjectSpawner
         _nextSpawnPosition.x = Random.Range(-1, 1) * 3.5f;
         GameObject forest = SpawnParentObject(transform, "Forest Spawn");
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             GameObject trees = SpawnObjectWithParent(_trees[Random.Range(0, _trees.Length)], forest.transform, new Vector3(i % 2 == 0 ? 1.2f : -1.2f, 0, i * 1.2f), new Vector3(-90, Random.Range(0, 24) * 10, 0));
-            ComputeNextPosition(2f, i % 2 == 0 ? 1f : -1f);
+            ComputeNextPosition(2f, 0);
         }
 
-        ComputeNextPosition(5, 0);
+        ComputeNextPosition(8, 0);
         return forest;
     }
 
@@ -79,7 +79,7 @@ public class EarthSpawner : ObjectSpawner
         _nextSpawnPosition.x = Random.Range(_borderSpawn, -_borderSpawn);
         GameObject vilage = SpawnParentObject(transform, "Vilage Spawn");
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             GameObject houseFirst = SpawnObjectWithParent(_house, vilage.transform, new Vector3(0, 0, i * 3f), new Vector3(-90, -90, 0));
 
@@ -91,7 +91,7 @@ public class EarthSpawner : ObjectSpawner
         Quaternion randomRotationVilage = Quaternion.Euler(new Vector3(0, Random.Range(-5, 5) * 10, 0));
         vilage.transform.rotation = randomRotationVilage;
 
-        ComputeNextPosition(5, 0);
+        ComputeNextPosition(8, 0);
         return vilage;
     }
 

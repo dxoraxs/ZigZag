@@ -9,6 +9,11 @@ public class GameController : MonoBehaviour
 
     public bool IsGame { get; private set; } = false;
 
+    public void OnPlayerUpdateSpeed()
+    {
+        _canvasUI.OnPlayerUpdateSpeed();
+    }
+
     public void StartGame()
     {
         IsGame = true;
@@ -18,6 +23,18 @@ public class GameController : MonoBehaviour
     {
         _canvasUI.ShowDeathPanel();
         IsGame = false;
+    }
+
+    public void PlayerInversVector()
+    {
+        if (!IsGame) return;
+        _playerMovement.InversVectorMovement();
+    }
+
+    public void InversePauseState()
+    {
+        Time.timeScale = Time.timeScale> 0.5f ? 0 : 1;
+        IsGame = !IsGame;
     }
 
     public void RestartGame()

@@ -10,6 +10,7 @@ public class TileSpawner : ObjectSpawner
     [SerializeField] private BranchingCoordinate[] _branching;
 
     private int _blockToNextEvent;
+    private TileBlock _selectTIle;
 
     protected new void Start()
     {
@@ -35,10 +36,10 @@ public class TileSpawner : ObjectSpawner
     private void FixedUpdate()
     {
         if (!_gameController.IsGame) return;
-
-        if (_objectQueue.Peek().transform.GetComponent<TileBlock>().GetLocalPosition + _startAnimationOffset < _playerScript.GetZPositinion())
+        _selectTIle = _objectQueue.CharCount().GetComponent<TileBlock>();
+        if (_selectTIle.GetLocalPosition + _startAnimationOffset < _playerScript.GetZPositinion())
         {
-            _objectQueue.Peek().transform.GetComponent<TileBlock>().FallTileBlock();
+            _selectTIle.FallTileBlock();
             StartCoroutine("Fade", _objectQueue.Dequeue());
         }
     }
@@ -91,31 +92,25 @@ public class TileSpawner : ObjectSpawner
     {
 
         GameObject portaEntryl = SpawnObjectWithParent(_titlePrefabWithPortal, transform, _nextSpawnPosition);
-        portaEntryl.GetComponent<PortalTile>().SetPortalTypeEntry();
 
         _objectQueue.Enqueue(portaEntryl);
         ComputeNextPosition(_offsetNextPosition.z, _offsetNextPosition.z * (int)Random.Range(4, 6) * (Random.Range(0, 10) < 5 ? -1 : 1));
 
         GameObject portaExit = SpawnObjectWithParent(_titlePrefabWithPortal, transform, _nextSpawnPosition);
         _objectQueue.Enqueue(portaExit);
-
+        PortalBranch(portaEntryl, portaExit);
+        SpawnObjectWithParent(_titlePrefab, portaExit.transform, new Vector3(-1, 0, 0)).transform.rotation = _titlePrefab.transform.rotation;
         if (portaEntryl.transform.position.x > lastPosition)
-            portaEntryl.transform.rotation = Quaternion.Euler(new Vector3(0, -45, 0));
-
-        if (Random.value > 0.5f)
         {
-            ComputeNextPosition(0.7f, -0.7f);
-            SpawnObjectWithParent(_titlePrefab, portaExit.transform, new Vector3(-1, 0, 0)).transform.rotation = _titlePrefab.transform.rotation;
+            portaEntryl.transform.rotation = Quaternion.Euler(new Vector3(0, -45, 0));
+            portaExit.transform.rotation = Quaternion.Euler(new Vector3(0, 135, 0));
+            ComputeNextPosition(0.7f, 0.7f);
         }
         else
         {
-            portaExit.transform.rotation = Quaternion.Euler(new Vector3(0, -45, 0));
-            ComputeNextPosition(0.7f, 0.7f);
-            SpawnObjectWithParent(_titlePrefab, portaExit.transform, new Vector3(1, 0, 0)).transform.rotation = _titlePrefab.transform.rotation;
+            ComputeNextPosition(0.7f, -0.7f);
         }
 
-        portaEntryl.GetComponent<PortalTile>().SetExitPortal(portaExit.transform);
-        //ComputeNextPosition(0.7f, 0.7f);
         ComputeNextPosition(_offsetNextPosition.z, CorrectionXPosition());
     }
 
